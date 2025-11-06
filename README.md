@@ -125,11 +125,11 @@ To address these challenges, our project offers an intuitive platform that bring
 
 
 **Pictures**
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
-![alt text](image-6.png)
-![alt text](image-7.png)
+![alt text](README_PICTURES/image.png)
+![alt text](README_PICTURES/image-1.png)
+![alt text](README_PICTURES/image-2.png)
+![alt text](README_PICTURES/image-3.png)
+![alt text](README_PICTURES/image-4.png)
+![alt text](README_PICTURES/image-5.png)
+![alt text](README_PICTURES/image-6.png)
+![alt text](README_PICTURES/image-7.png)
