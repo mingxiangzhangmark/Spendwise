@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Tailwind v4 dark mode variant */
+@variant dark (.dark &);
+
+/* Small motion polish for the Home page */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 500ms ease forwards; }
+
+/* 删除Google Fonts导入，使用本地字体 */
+@font-face {
+  font-family: 'Open Dyslexic';
+  src: url('/OpenDyslexic-Regular.woff2') format('woff2'),
+       url('/OpenDyslexic-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Dyslexic';
+  src: url('/OpenDyslexic-Bold.woff2') format('woff2'),
+       url('/OpenDyslexic-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 添加无障碍字体 */
+.dyslexia-friendly {
+  font-family: 'Open Dyslexic', sans-serif !important;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  word-spacing: 3px;
+}
+
+.dyslexia-friendly p, 
+.dyslexia-friendly h1,
+.dyslexia-friendly h2,
+.dyslexia-friendly h3,
+.dyslexia-friendly h4,
+.dyslexia-friendly h5,
+.dyslexia-friendly h6,
+.dyslexia-friendly span,
+.dyslexia-friendly button,
+.dyslexia-friendly a,
+.dyslexia-friendly input,
+.dyslexia-friendly textarea,
+.dyslexia-friendly label,
+.dyslexia-friendly li {
+  font-family: 'Open Dyslexic', sans-serif !important;
+}
+
+/* Dark mode support - removed @apply as it's deprecated in Tailwind v4 */
+/* Body background is now handled by DashboardLayout component */
