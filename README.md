@@ -85,10 +85,10 @@ To address these challenges, our project offers an intuitive platform that bring
 
 ## Tech Stack
 
-- **Frontend:** React
-- **Backend:** Node.js
+- **Frontend:** React, Node.js
+- **Backend:** Java Spring boot
 - **Database:** PostgreSQL
-- **Related APIs:** Gemini API, others to be decided
+- **Related APIs:** Gemini API
 
 ---
 
@@ -108,20 +108,206 @@ To address these challenges, our project offers an intuitive platform that bring
 
 ## 12. Local Installation
 
-**Prerequisites:**
+This guide will help you set up and run the Personal Finance and Budget Tracker on your local machine.
 
-- Node.js
-- React.js
-- npm or yarn
+### Prerequisites
 
-**Steps(to be specified after development):**
+Before you begin, ensure you have the following installed on your system:
 
-1. Clone the repo
-2. Install backend and frontend dependencies
-3. Configure environment variables:
-4. Run DB
-5. Start backend and frontend
-6. Open browser with local host link
+- **Java 17 or higher** - Required for Spring Boot backend
+- **Node.js** (v16 or higher) and **npm** - Required for React frontend  
+- **PostgreSQL** (v12 or higher) - Required for database
+- **Git** - To clone the repository
+
+### Installation Steps
+
+#### 1. Clone the Repository
+
+```bash
+git clone <your-repository-url>
+cd Spendwise
+```
+
+#### 2. Database Setup
+
+1. **Install PostgreSQL** (if not already installed):
+   - **macOS**: `brew install postgresql`
+   - **Ubuntu/Debian**: `sudo apt-get install postgresql postgresql-contrib`
+   - **Windows**: Download from [PostgreSQL official website](https://www.postgresql.org/download/)
+
+2. **Start PostgreSQL service**:
+   - **macOS**: `brew services start postgresql`
+   - **Linux**: `sudo systemctl start postgresql`
+   - **Windows**: Start via Services or pgAdmin
+
+3. **Create the database**:
+   ```sql
+   -- Connect to PostgreSQL as superuser
+   psql -U postgres
+   
+   -- Create database
+   CREATE DATABASE spendwise;
+   
+   -- Create user (optional, or use existing postgres user)
+   CREATE USER spendwise_user WITH PASSWORD 'your_password';
+   GRANT ALL PRIVILEGES ON DATABASE spendwise TO spendwise_user;
+   
+   -- Exit
+   \q
+   ```
+
+#### 3. Backend Setup (Spring Boot)
+
+1. **Navigate to backend directory**:
+   ```bash
+   cd backend
+   ```
+
+2. **Configure database connection**:
+   Edit `src/main/resources/application.properties`:
+   ```properties
+   spring.datasource.url=jdbc:postgresql://localhost:5432/spendwise
+   spring.datasource.username=postgres
+   spring.datasource.password=your_password
+   
+   # Optional: Add your Gemini API key for AI features
+   gemini.apiKey=your_gemini_api_key_here
+   ```
+
+3. **Install dependencies and run**:
+   ```bash
+   # Using Maven wrapper (recommended)
+   ./mvnw clean install
+   ./mvnw spring-boot:run
+   
+   # Or using system Maven
+   mvn clean install
+   mvn spring-boot:run
+   ```
+
+   The backend will start on `http://localhost:8080`
+
+#### 4. Frontend Setup (React)
+
+1. **Open a new terminal** and navigate to frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**:
+   ```bash
+   npm run dev
+   ```
+
+   The frontend will start on `http://localhost:5173`
+
+### Verification
+
+1. **Backend API**: Visit `http://localhost:8080/api` to check if the backend is running
+2. **Frontend**: Visit `http://localhost:5173` to access the application
+3. **Database**: Check that tables are created automatically in your PostgreSQL database
+
+### Environment Configuration
+
+#### Backend Environment Variables (Optional)
+
+Create a `.env` file in the backend directory or set environment variables:
+
+```bash
+# Database
+DB_URL=jdbc:postgresql://localhost:5432/spendwise
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+
+# Gemini API (for AI features)
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+#### Frontend Environment Variables (Optional)
+
+Create a `.env` file in the frontend directory:
+
+```bash
+VITE_API_BASE_URL=http://localhost:8080/api
+```
+
+### Troubleshooting
+
+#### Common Issues:
+
+1. **PostgreSQL Connection Error**:
+   - Ensure PostgreSQL is running: `brew services list | grep postgresql`
+   - Check database credentials in `application.properties`
+   - Verify database exists: `psql -U postgres -l`
+
+2. **Port Already in Use**:
+   - Backend (8080): Change port in `application.properties`: `server.port=8081`
+   - Frontend (5173): Vite will automatically try the next available port
+
+3. **Java Version Issues**:
+   - Check Java version: `java -version`
+   - Ensure Java 17+ is installed and set as default
+
+4. **Node.js/npm Issues**:
+   - Check versions: `node -v` and `npm -v`
+   - Clear npm cache: `npm cache clean --force`
+   - Delete `node_modules` and run `npm install` again
+
+### Development Scripts
+
+#### Backend:
+```bash
+# Run tests
+./mvnw test
+
+# Package application
+./mvnw package
+
+# Run with specific profile
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+```
+
+#### Frontend:
+```bash
+# Development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Lint code
+npm run lint
+```
+
+### Production Deployment Notes
+
+For production deployment, you'll need to:
+
+1. Build the frontend: `npm run build`
+2. Package the backend: `./mvnw package`
+3. Configure production database settings
+4. Set up proper environment variables
+5. Configure reverse proxy (nginx) if needed
+
+### Getting Started
+
+1. Start PostgreSQL service
+2. Run the backend: `cd backend && ./mvnw spring-boot:run`
+3. Run the frontend: `cd frontend && npm run dev`
+4. Open your browser to `http://localhost:5173`
+5. Create an account and start tracking your finances!
+
+For any issues or questions, please check the troubleshooting section above or refer to the project documentation.
+
+
 
 
 **Pictures**
